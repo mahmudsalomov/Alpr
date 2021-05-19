@@ -11,18 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 
 <body class="text-center" style="background-color: lightgray">
-<style>
-    /*.btn:focus, .btn:active, button:focus, button:active {*/
-    /*    outline: none !important;*/
-    /*    box-shadow: none !important;*/
-    /*}*/
 
-    /*#image-gallery .modal-footer{*/
-    /*    display: block;*/
-    /*}*/
-
-
-</style>
 <div id="body" class="container-fluid text-center d-flex justify-content-center row mt-5">
 
     <h5 class="col-12">Mashina tasvirini yuklang va aniqlash tugmasini bosing</h5>
@@ -60,7 +49,6 @@
 
     $(function() {
         $(".preload").fadeOut(500, function() {
-            // $(".content").fadeIn(1000);
         });
     });
 
@@ -71,31 +59,14 @@
             "</button>";
 
 
-        // axios.post("https://api.platerecognizer.com/v1/plate-reader/",data, {
-        axios.post("api/upload",data, {
-                // headers: {
-                //     Authorization: 'Token '+"7e759aefd90e3262d59172c13092873a9cf0bdc5",
-                //     // 'X-Requested-With': "XMLHttpRequest",
-                //     // 'Access-Control-Allow-Origin': "*",
-                //     // 'Access-Control-Allow-Methods':'GET,PUT,POST,OPTIONS',
-                //     // 'Accept':'*/*',
-                //     // 'HOST':'https://api.platerecognizer.com/v1/plate-reader/',
-                //     // 'ORIGIN':'https://api.platerecognizer.com/v1/plate-reader/',
-                //
-                //     'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
-                // }
-            }
+        axios.post("api/upload",data
         )
             .then(function (response) {
-                console.log(JSON.stringify(response));
                 let data=JSON.parse(JSON.stringify(response))
-                console.log(data);
                 document.getElementById("root").innerHTML="  <button id=\"btn0\" onclick=\"go()\" class=\"btn btn-success\" >Aniqlash</button>\n";
-                console.log(data.data.results[0].plate)
                 document.getElementById("plate").innerHTML="<h3>Aniqlandi : <strong>"+data.data.results[0].plate+"</strong></h3>"
             })
             .catch(function (error) {
-                console.log(error);
                 document.getElementById("root").innerHTML="  <button id=\"btn0\" onclick=\"go()\" class=\"btn btn-success\" >Aniqlash</button>\n";
                 document.getElementById("plate").innerHTML=""
 
@@ -110,14 +81,10 @@
         data.append('upload', uploadInput.files[0]);
         data.append('regions', 'uz');
         let view=document.getElementById('view');
-        console.log(uploadInput)
-        console.log(uploadInput.files[0])
-        console.log(data)
         view.src = URL.createObjectURL(uploadInput.files[0]);
 
         document.getElementById("plate").innerHTML=""
 
-        // view.src=uploadInput.files[0];
 
 
         k(data);
@@ -132,7 +99,6 @@
 
 
 
-    // })
 
 
 
