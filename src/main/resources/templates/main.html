@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="  crossorigin="anonymous" ></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"  crossorigin="anonymous" >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+<script>
+
+    function go() {
+
+        const uploadInput = document.getElementById('uploadBtn');
+        let data = new window.FormData();
+        data.append('upload', uploadInput.files[0]);
+        data.append('regions', 'gb');
+        let view=document.getElementById('view');
+        console.log(uploadInput)
+        console.log(uploadInput.files[0])
+        // data.append("upload", uploadInput.files[0]);
+
+        view.src = URL.createObjectURL(uploadInput.files[0]);
+        // view.src=uploadInput.files[0];
+        var config = {
+            method: 'post',
+            url: 'https://api.platerecognizer.com/v1/plate-reader',
+            headers: {
+                'Authorization': 'Token 7e759aefd90e3262d59172c13092873a9cf0bdc5',
+                'Content-Type': 'multipart/form-data',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+            },
+            data : data
+        };
+
+        // axios(config)
+        axios.post("https://api.platerecognizer.com/v1/plate-reader/",data, {
+                headers: {
+                    'Authorization': 'Token 7e759aefd90e3262d59172c13092873a9cf0bdc5',
+                    'X-Requested-With': "XMLHttpRequest",
+                    'Access-Control-Allow-Origin': "*",
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                    'Content-Type': "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2)
+                }
+            }
+        )
+            .then(function (response) {
+                console.log(JSON.stringify(response));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
+
+
+
+    // })
+
+
+
+
+</script>
+<body class="text-center" style="background-color: lightgray">
+<style>
+    /*.btn:focus, .btn:active, button:focus, button:active {*/
+    /*    outline: none !important;*/
+    /*    box-shadow: none !important;*/
+    /*}*/
+
+    /*#image-gallery .modal-footer{*/
+    /*    display: block;*/
+    /*}*/
+
+
+</style>
+<div id="body" class="container-fluid text-center d-flex justify-content-center row mt-5">
+
+    <div class="custom-file col-sm-5 col-md-3 col-xs-9 ml-md-3 mt-md-2">
+        <input type="file" class="custom-file-input" id="uploadBtn" required>
+        <label class="custom-file-label" for="uploadBtn">Fayl yuklash...</label>
+    </div>
+    <button id="btn0" onclick="go()" class="btn col-1 mt-1 col-sm-2 col-md-1 btn-success" >Saqlash</button>
+
+    <div class="text-center col-12 d-flex justify-content-center mt-5">
+        <div class="row text-center d-flex justify-content-center">
+            <div class="row text-center d-flex justify-content-center" id="imageGalery">
+                <img style="width: 50%; height: 50%" id="view" src="">
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+
+</html>
