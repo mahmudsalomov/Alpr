@@ -14,7 +14,7 @@
 
 <div id="body" class="container-fluid text-center d-flex justify-content-center row mt-5">
 
-    <h5 class="col-12">Mashina tasvirini yuklang va aniqlash tugmasini bosing</h5>
+    <h5 class="col-12">Mashina tasvirini yuklang va aniqlash tugmasini bosing(Hozircha faqat bitta mashina raqamini aniqlaydi)</h5>
     <div class="custom-file col-sm-5 col-md-3 col-xs-9 ml-md-3 mt-md-2">
         <input type="file" class="f" id="uploadBtn" required>
         <label class="f" for="uploadBtn"></label>
@@ -48,7 +48,7 @@
 <script>
 
     $(function() {
-        $(".preload").fadeOut(500, function() {
+        $(".preload").fadeOut(1000, function() {
         });
     });
 
@@ -63,6 +63,7 @@
         )
             .then(function (response) {
                 let data=JSON.parse(JSON.stringify(response))
+                console.log(data)
                 document.getElementById("root").innerHTML="  <button id=\"btn0\" onclick=\"go()\" class=\"btn btn-success\" >Aniqlash</button>\n";
                 document.getElementById("plate").innerHTML="<h3>Aniqlandi : <strong>"+data.data.results[0].plate+"</strong></h3>"
             })
