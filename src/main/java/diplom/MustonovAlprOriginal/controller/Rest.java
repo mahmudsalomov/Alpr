@@ -37,10 +37,10 @@ public class Rest {
     @PostMapping("upload")
     public HttpEntity<?> upload(@RequestBody MultipartFile[] upload) throws IOException {
 //        String image=fileStorageService.save(multipartFile);
-//        System.out.println(upload.length);
-//        System.out.println(upload[0].getName());
-//        System.out.println(upload[0].getOriginalFilename());
-//        System.out.println(upload[0].getContentType());
+        System.out.println(upload.length);
+        System.out.println(upload[0].getName());
+        System.out.println(upload[0].getOriginalFilename());
+        System.out.println(upload[0].getContentType());
 //        System.out.println(upload[0].getInputStream());
         String resp="";
 //        System.out.println(new File(convert(upload[0])));
